@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V.VIP Photobooth Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css"> 
+</head>
+
+<body class="bg-gradient-to-br from-slate-950 via-[#0f172a] to-black text-slate-200 min-h-screen flex flex-col justify-between overflow-x-hidden">
+<div id="welcome-screen"
+class="fixed inset-0 flex items-center justify-center overflow-hidden bg-black z-50">
+
+    <!-- Aurora -->
+    <div class="aurora-1 absolute w-[900px] h-[900px] bg-cyan-500/20 rounded-full blur-[250px]"></div>
+
+<div class="aurora-2 absolute w-[700px] h-[700px] bg-purple-500/20 rounded-full blur-[250px]"></div>
+
+    <!-- Floating Particles -->
+    <div id="particles"></div>
+
+    <!-- Scanline -->
+    <div class="scanlines"></div>
+
+    <!-- Content -->
+    <div class="relative text-center z-10">
+
+        <div class="mb-8">
+            <span class="text-cyan-400 tracking-[0.5em] text-sm">
+                EXCLUSIVE PHOTO EXPERIENCE
+            </span>
+        </div>
+
+        <h1 class="logo-vvip">
+            V.VIP
+        </h1>
+
+        <div class="text-slate-300 text-2xl mb-2">
+            Digital Photobooth
+        </div>
+
+        <div class="text-slate-500 mb-12">
+            Capture • Create • Download
+        </div>
+
+        <button onclick="startPhotobooth()"
+        class="start-btn">
+            START EXPERIENCE
+        </button>
+
+    </div>
+
+</div>
+
+<div id="main-app" class="hidden">
+    <div id="loader" class="fixed inset-0 bg-slate-950 flex items-center justify-center z-50">
+        <div class="text-center">
+                <div class="text-4xl mb-4">📸</div>
+                <div class="font-heading tracking-widest">
+                INITIALIZING V.VIP ENGINE...
+            </div>
+        </div>
+    </div>
+    <div class="fixed top-[-20%] left-[-10%] w-[60vw] h-[60vw] bg-pink-500/20 rounded-full blur-[180px] pointer-events-none"></div>
+    <div class="fixed bottom-[-20%] right-[-10%] w-[60vw] h-[60vw] bg-cyan-500/20 rounded-full blur-[180px] pointer-events-none"></div>
+    <div class="fixed top-[30%] left-[35%] w-[30vw] h-[30vw] bg-purple-500/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <header class="w-full max-w-7xl mx-auto px-6 py-5 flex justify-between items-center border-b border-slate-900/60 z-10">
+        <div class="flex items-center space-x-3">
+                <span class="h-2.5 w-2.5 rounded-full bg-cyan-400 animate-pulse shadow-[0_0_10px_#22d3ee]"></span>
+            <h1 class="font-heading font-bold text-base tracking-[0.2em] text-white">V.VIP <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500 font-light">PHOTOBOOTH</span></h1>
+        </div>
+        <div class="bg-slate-900/80 border border-slate-800 px-3 py-1 rounded-full text-[10px] text-slate-400 uppercase font-heading tracking-widest">
+            📷 2x2 Landscape Matrix Mode
+        </div>
+    </header>
+
+    <main class="w-full max-w-7xl mx-auto px-4 lg:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start z-10 flex-grow">
+        
+        <section class="lg:col-span-6 flex flex-col space-y-5">
+            
+            <div class="glass-card p-3 rounded-3xl border border-slate-800/80 shadow-2xl">
+                <div class="relative w-full aspect-[4/3] bg-slate-950 rounded-[30px] overflow-hidden border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
+                    <video id="webcam" autoplay playsinline class="w-full h-full object-cover"></video>
+                        <div class="absolute top-4 left-4 flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
+                        <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
+                        <span class="text-xs text-white font-bold">REC</span>
+                        </div>
+                    <div class="absolute inset-5 pointer-events-none border border-white/5 rounded-xl">
+                        <div class="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-cyan-400/40"></div>
+                        <div class="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-cyan-400/40"></div>
+                        <div class="absolute bottom-0 left-0 w-5 h-5 border-b-2 border-l-2 border-cyan-400/40"></div>
+                        <div class="absolute bottom-0 right-0 w-5 h-5 border-b-2 border-r-2 border-cyan-400/40"></div>
+                    </div>
+
+                    <div id="countdown" class="font-heading absolute inset-0 bg-slate-950/80 hidden items-center justify-center text-9xl font-black text-amber-400">3</div>
+                    </div>
+                    </div>
+                <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden mb-3">
+            <div id="progress" class="h-full bg-amber-500 w-0 transition-all duration-500"></div>
+        </div>
+            <button id="btn-capture" class="group relative w-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-600 text-slate-950 font-heading font-bold py-4 rounded-2xl transition-all duration-300 hover:scale-[1.02] hover:-translate-y-1 shadow-[0_0_30px_-5px_rgba(245,158,11,0.4)] hover:shadow-[0_0_50px_0_rgba(245,158,11,0.8)] text-sm uppercase tracking-wider overflow-hidden">
+                <span class="flex items-center justify-center space-x-2">
+                    <span>⚡ MULAI FOTO ⚡</span>
+                </span>
+            </button>
+
+            <div id="menu-opsi" class="hidden glass-card p-5 rounded-3xl border border-slate-800/80 space-y-5 shadow-xl">
+                <div>
+                    <div>
+                        <label class="block text-[10px] font-bold text-slate-400 mb-2.5 uppercase tracking-[0.2em] font-heading">Layout Style</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            
+                        <button onclick="pilihLayout('grid'); setActiveButton('.layout-btn', this)"class="option-btn layout-btn active">
+                        ⬜ 2x2 Grid
+                </button>
+            </div>
+        </div>
+                    <label class="block text-[10px] font-bold text-slate-400 mb-2.5 mt-6 uppercase tracking-[0.2em] font-heading">1. Select Creative Theme Template</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="pilihTema('1'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">👹 MU VIP</button>
+                        <button onclick="pilihTema('2'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">🐲 Nailong</button>
+                        <button onclick="pilihTema('3'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">🐱 Cute Meow</button>
+                        <button onclick="pilihTema('4'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">🎞️ Kodak Reel</button>
+                        <button onclick="pilihTema('5'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">👾 Y2K Neon</button>
+                        <button onclick="pilihTema('6'); setActiveButton('.tema-btn', this)"class="option-btn tema-btn">☁️ Toy Story</button>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 mb-2.5 uppercase tracking-[0.2em] font-heading">2. Fine Art Color Grading</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button onclick="pilihFilter('1'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">Raw</button>
+                        <button onclick="pilihFilter('2'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">HD Clear</button>
+                        <button onclick="pilihFilter('3'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">B&W Noir</button>
+                        <button onclick="pilihFilter('4'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">Sepia Vintage</button>
+                        <button onclick="pilihFilter('5'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">Golden Hour</button>
+                        <button onclick="pilihFilter('6'); setActiveButton('.filter-btn', this)"class="option-btn filter-btn">Nordic Vibe</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="lg:col-span-6 flex flex-col items-center">
+            <div class="glass-card p-5 rounded-[32px] border border-slate-800/80 shadow-2xl w-full flex flex-col items-center">
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] font-heading mb-4">Masterpiece Canvas Output (1200x900)</span>
+                
+                <div class="relative bg-slate-950 p-2 rounded-2xl border border-slate-900 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.8)] max-w-full overflow-hidden">
+                    <canvas id="canvasHasil" width="1200" height="900" class="w-full max-w-[460px] h-auto rounded-lg bg-slate-900 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"></canvas>
+                </div>
+
+                <button id="btn-download" onclick="downloadFoto()" class="hidden mt-5 w-full bg-slate-100 hover:bg-white text-slate-950 font-heading font-bold py-3.5 rounded-xl transition shadow-xl text-center uppercase tracking-wider text-xs">
+                    💾 Export Foto
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="w-full text-center py-4 border-t border-slate-900/40 text-[9px] text-slate-600 font-heading tracking-widest uppercase">
+        © 2026 V.VIP Studio Systems. Engaged with Hybrid Engine.
+    </footer>
+
+    <audio id="audio-shutter" src="audio/shutter.mp3" preload="auto"></audio>
+    
+    <script src="script.js"></script>
+</div>
+</body>
+</html>

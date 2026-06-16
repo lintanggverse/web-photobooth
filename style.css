@@ -1,0 +1,251 @@
+body { 
+    font-family: 'Plus Jakarta Sans', sans-serif; 
+}
+
+.font-heading { 
+    font-family: 'Space Grotesk', sans-serif; 
+}
+
+video { 
+    transform: scaleX(-1); 
+}
+
+.glass-card {
+    background: rgba(13, 18, 30, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+@keyframes shine {
+    100% { left: 125%; }
+}
+
+.animate-shine {
+    animation: shine 0.8s ease-in-out;
+}
+
+@keyframes floatGlow {
+    0%,100%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-20px);
+    }
+}
+
+#welcome-screen .absolute{
+    animation: floatGlow 6s ease-in-out infinite;
+}
+
+@keyframes fadeUp {
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+#welcome-screen .relative{
+    animation: fadeUp 1s ease;
+}
+
+.logo-vvip{
+    font-size:120px;
+    font-weight:900;
+
+    background:linear-gradient(
+        90deg,
+        #00ffff,
+        #ffffff,
+        #8b5cf6,
+        #ff00ff,
+        #00ffff
+    );
+
+    background-size:400%;
+
+    -webkit-background-clip:text;
+    background-clip:text;
+
+    color:transparent;
+
+    text-shadow:
+        0 0 10px rgba(0,255,255,.4),
+        0 0 30px rgba(0,255,255,.5),
+        0 0 60px rgba(139,92,246,.4);
+
+    animation:
+        holo 6s linear infinite,
+        floatLogo 4s ease-in-out infinite,
+        glowPulse 3s ease-in-out infinite;
+}
+
+.start-btn{
+    padding:18px 60px;
+    border-radius:20px;
+    color:white;
+    font-weight:700;
+
+    background:linear-gradient(
+    90deg,
+    #00d4ff,
+    #2563eb,
+    #7c3aed
+    );
+
+    box-shadow:
+    0 0 25px #00d4ff,
+    0 0 60px #2563eb,
+    0 0 120px #7c3aed;
+
+    transition:.3s;
+}
+
+.start-btn:hover{
+    transform:scale(1.08);
+}
+
+.scanlines{
+    position:absolute;
+    inset:0;
+    background:
+    repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,.02) 3px
+    );
+
+    pointer-events:none;
+}
+
+.option-btn{
+    background: rgba(15,23,42,.8);
+    border:1px solid rgba(255,255,255,.08);
+    color:white;
+
+    padding:8px 12px;
+    border-radius:12px;
+
+    font-size:12px;
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.option-btn:hover{
+    transform:translateY(-2px);
+    border-color:#00d4ff;
+
+    box-shadow:
+    0 0 15px rgba(0,212,255,.4),
+    0 0 30px rgba(0,212,255,.2);
+}
+
+.option-btn.active{
+    background:linear-gradient(
+        90deg,
+        #00d4ff,
+        #2563eb,
+        #7c3aed
+    );
+
+    border-color:#00d4ff;
+
+    box-shadow:
+        0 0 10px #00d4ff,
+        0 0 25px #2563eb;
+
+    transform:scale(1.02);
+}
+
+#particles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+}
+
+.particle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    background:white;
+    opacity:.5;
+    animation: floatParticle linear infinite;
+}
+
+@keyframes floatParticle{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+#particles{
+    position:absolute;
+    inset:0;
+    overflow:hidden;
+}
+
+@keyframes floatParticle{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-100vh);
+        opacity:0;
+    }
+}
+
+.glass-card{
+    transition:.2s;
+    transform-style:preserve-3d;
+}
+
+@keyframes floatLogo{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-15px);
+    }
+}
+
+@keyframes holo{
+    0%{
+        background-position:0% 50%;
+    }
+
+    100%{
+        background-position:400% 50%;
+    }
+}
+
+@keyframes glowPulse{
+    0%,100%{
+        filter:drop-shadow(0 0 15px rgba(0,255,255,.5));
+    }
+
+    50%{
+        filter:drop-shadow(0 0 35px rgba(139,92,246,.9));
+    }
+}
