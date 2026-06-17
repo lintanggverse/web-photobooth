@@ -34,8 +34,12 @@ console.log("JS Connected");
         async function initCamera() {
     try {
         const stream = await navigator.mediaDevices.getUserMedia({
-            video: true
-        });
+            video: {
+                facingMode: "user",
+                width: { ideal: 1280 },
+                height: { ideal: 720 }
+            }
+        })
 
         video.srcObject = stream;
         video.play();
@@ -277,7 +281,41 @@ console.log("JS Connected");
                 else ctx.filter = 'none';
 
                 // Paint captured image stream directly onto target matrix layer
-                ctx.drawImage(imgObj, slot.x, slot.y, slot_w, slot_h);
+                const imgRatio = imgObj.width / imgObj.height;
+                const slotRatio = slot_w / slot_h;
+
+                let drawWidth;
+                let drawHeight;
+                let offsetX = 0;
+                let offsetY = 0;
+
+                if(imgRatio > slotRatio)
+                {
+                    drawHeight = slot_h;
+                    drawWidth = drawHeight * imgRatio;
+                    offsetX = -(drawWidth - slot_w) / 2;
+                }
+                else
+                {
+                    drawWidth = slot_w;
+                    drawHeight = drawWidth / imgRatio;
+                    offsetY = -(drawHeight - slot_h) / 2;
+                }
+
+                ctx.save();
+
+                ctx.beginPath();
+                ctx.rect(slot.x, slot.y, slot_w, slot_h);
+                ctx.clip();
+
+                ctx.drawImage(
+                    imgObj,
+                    slot.x + offsetX,
+                    slot.y + offsetY,
+                    drawWidth,
+                    drawHeight
+                );
+
                 ctx.restore();
 
                 // Glossy Glass Overlay Simulation Engine

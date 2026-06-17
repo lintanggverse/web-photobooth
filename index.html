@@ -79,12 +79,12 @@ class="fixed inset-0 flex items-center justify-center overflow-hidden bg-black z
         </div>
     </header>
 
-    <main class="w-full max-w-7xl mx-auto px-4 lg:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start z-10 flex-grow">
+    <main class="w-full max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 py-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start z-10 flex-grow">
         
         <section class="lg:col-span-6 flex flex-col space-y-5">
             
             <div class="glass-card p-3 rounded-3xl border border-slate-800/80 shadow-2xl">
-                <div class="relative w-full aspect-[4/3] bg-slate-950 rounded-[30px] overflow-hidden border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
+                <div class="relative w-full aspect-[3/4] md:aspect-[4/3] bg-slate-950 rounded-[30px] overflow-hidden border border-cyan-500/30 shadow-[0_0_40px_rgba(34,211,238,0.25)]">
                     <video id="webcam" autoplay playsinline class="w-full h-full object-cover"></video>
                         <div class="absolute top-4 left-4 flex items-center gap-2 bg-black/50 px-3 py-1 rounded-full">
                         <div class="w-2 h-2 bg-red-500 rounded-full animate-pulse"></div>
@@ -150,7 +150,7 @@ class="fixed inset-0 flex items-center justify-center overflow-hidden bg-black z
                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] font-heading mb-4">Masterpiece Canvas Output (1200x900)</span>
                 
                 <div class="relative bg-slate-950 p-2 rounded-2xl border border-slate-900 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.8)] max-w-full overflow-hidden">
-                    <canvas id="canvasHasil" width="1200" height="900" class="w-full max-w-[460px] h-auto rounded-lg bg-slate-900 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"></canvas>
+                    <canvas id="canvasHasil" width="1200" height="900" class="w-full max-w-[320px] sm:max-w-[400px] md:max-w-[460px] h-auto"></canvas>
                 </div>
 
                 <button id="btn-download" onclick="downloadFoto()" class="hidden mt-5 w-full bg-slate-100 hover:bg-white text-slate-950 font-heading font-bold py-3.5 rounded-xl transition shadow-xl text-center uppercase tracking-wider text-xs">

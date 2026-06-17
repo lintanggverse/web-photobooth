@@ -52,8 +52,8 @@ video {
     animation: fadeUp 1s ease;
 }
 
-.logo-vvip{
-    font-size:120px;
+.logo-vvip {
+    font-size: clamp(60px, 15vw, 120px);
     font-weight:900;
 
     background:linear-gradient(
