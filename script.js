@@ -537,3 +537,16 @@ card.addEventListener("mousemove",(e)=>{
 
 });
 
+function cekDevice() {
+    const warning = document.getElementById("mobile-warning");
+
+    if (window.innerWidth < 768) {
+        warning.classList.remove("hidden");
+    } else {
+        warning.classList.add("hidden");
+    }
+}
+
+cekDevice();
+window.addEventListener("resize", cekDevice);
+
